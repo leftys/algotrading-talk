@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1920"
+   height="1080"
+   viewBox="0 0 1920 1080"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="skewed-distribution.svg"
+   inkscape:export-filename="/home/lefty/projekty/algotrading-talk/imgs/skewed-distribution.png"
+   inkscape:export-xdpi="300.01099"
+   inkscape:export-ydpi="300.01099"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#cccccc"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="1"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="0.66574074"
+     inkscape:cx="1058.2197"
+     inkscape:cy="458.1363"
+     inkscape:window-width="2514"
+     inkscape:window-height="1370"
+     inkscape:window-x="46"
+     inkscape:window-y="33"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 75.294639,883.24403 H 1822.0447"
+       id="path857" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 986.42733,925.985 V 139.25226"
+       id="path892"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:80px;line-height:1.25;font-family:Purisa;-inkscape-font-specification:Purisa"
+       x="1527.8254"
+       y="984.4538"
+       id="text3591"><tspan
+         sodipodi:role="line"
+         id="tspan3589"
+         x="1527.8254"
+         y="984.4538"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif">Ziskovost</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:80px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+       x="249.61302"
+       y="101.49739"
+       id="text9403"><tspan
+         sodipodi:role="line"
+         id="tspan9401"
+         x="249.61302"
+         y="101.49739">Pravděpodobnost</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 129.99001,853.77788 C 1338.468,868.88615 1159.2923,685.70936 1307.7105,684.71239 c 182.5719,-1.22639 115.1894,183.87062 456.8427,192.04665"
+       id="path13456"
+       sodipodi:nodetypes="csc" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#188e00;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:8, 16;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 1308.879,402.47467 -0.278,490.90185"
+       id="path14239"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#8e1200;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:8, 16;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 919.9678,402.37483 -0.278,490.90185"
+       id="path15610"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:80px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke:#188e00"
+       x="1291.6178"
+       y="327.00778"
+       id="text20248"><tspan
+         sodipodi:role="line"
+         id="tspan20246"
+         x="1291.6178"
+         y="327.00778">Modus</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:80px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#8e1200"
+       x="645.31696"
+       y="325.22003"
+       id="text20248-6"><tspan
+         sodipodi:role="line"
+         id="tspan20246-9"
+         x="645.31696"
+         y="325.22003">Průměr</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:80px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif"
+       x="1214.2657"
+       y="997.25"
+       id="text24331"><tspan
+         sodipodi:role="line"
+         id="tspan24329"
+         x="1214.2657"
+         y="997.25">+1%</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:80px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif"
+       x="788.41473"
+       y="996.05402"
+       id="text24331-3"
+       inkscape:transform-center-x="-378.03937"
+       inkscape:transform-center-y="5.9696559"><tspan
+         sodipodi:role="line"
+         id="tspan24329-3"
+         x="788.41473"
+         y="996.05402">-0.1%</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:80px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif"
+       x="63.997528"
+       y="995.64703"
+       id="text24331-3-8"
+       inkscape:transform-center-x="-378.03937"
+       inkscape:transform-center-y="5.9696559"><tspan
+         sodipodi:role="line"
+         id="tspan24329-3-0"
+         x="63.997528"
+         y="995.64703">-5%</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 144.79513,842.52879 -14.80512,11.24909 13.31087,9.84976"
+       id="path27333"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 998.15977,152.26585 986.42733,137.84075 977.02305,151.47"
+       id="path27713"
+       sodipodi:nodetypes="ccc"
+       inkscape:transform-center-x="375.31016"
+       inkscape:transform-center-y="297.83246" />
+  </g>
+</svg>

@@ -1,277 +1,389 @@
 ---
 theme: white
-fragments: false # TODO remove # set fragments by {.fragment}
+fragments: false # TODO remove
 ---
 
 <!-- TODO move some bullet points into notes? -->
+<!-- TODO posunout algo trading jako prvni cast? -->
+<!-- TODO zdroje? -->
 
-# Algo-trading v kryptu
+# <small>Algo-trading v kryptu</small>
 
-<img src="imgs/logo-mini.svg" width="50%" alt="Liquidity labs" />
+Trh z pohledu poskytovatele likvidity
+
+<img src="imgs/liquidity-labs-logo.svg" width="30%" alt="Liquidity labs" />
 
 Jan Škoda
 
 note: intro story?
 note: define algo-trading?
+note: co je likvidita a proc je potrebna, jak se poskytuje, jak vypada algo-trading obecne a jake ma problemy. obnazime i nejake problemy rucniho tradingu. konflikty v trhu.
+
+<!-- 2m -->
 
 ---
 
-## About me
+## Intro
 
 - Jan Škoda
-- AI degree from MFF UK
-- ex Head of Research in Quantlane
-- Founder of Liquidity Labs
-- Founder of Crypto Lake market data service
+- absolvent AI na MFF UK
+- ex Head of Research v Quantlane
+- Market maker <a href="https://liquiditylabs.xyz/">Liquidity Labs</a>
+- Poskytovatel historických dat <a href="https://crypto-lake.com/">Crypto Lake</a>
 
-note: test 123
-note: second note
-
---
-
-## About Liquidity Labs
-
-- liquidity provider / market maker
-- on (DeFi) altcoins, on CEXes
-- aim: contribute to stability
-- we cooperate with token projects and exchanges
-
-<img src="imgs/logo-mini.svg" width="50%" alt="Liquidity labs" />
-
-note: we are funded by token projects and exchanges, not just from trading revenue. this is unique among algo-trading.
-note: LP/MM term
-
---
-
-## Outline
-
-- what is **liquidity**, it's role in market
-  - liquidity providers
-  - adversary effects
-  - issues of DEXes
-  - who pays for liquidity? exchange rebates, project deals
-- **algo-trading** {.fragment}
-  - examples, good & bad
-  - caveats (overfit, skew, )
-- **Market (Maker) adversaries**
-  - manipulations
-  - insider trading
-- retail traders, does it make sense?
-  - where it does make sense?
-- running a one-man-show project takeaways
-  - more efficient than a small team
-  - automation
-
-<!-- concept of agreessivity? -->
-<!-- fake volume? -->
+<!-- 4m -->
 
 ---
 
-## Liquidity
+## Likvidita aktiva
 
-- Asset is:
-  - Liquid = easy & cheap to buy / sell
-  - Illiquid = high transaction costs, slippage, unstable price
+- Aktivum je:
+  - Likvidní = lze snadno a s nízkými náklady koupit / prodat
+  - Nelikvidní = vysoké transakční náklady, prodej trvá dlouho, slippage, nestabilní cena
 
-<div class="fragment" style="margin: 0 100px 0 100px;">
-	<div style="display: flex; justify-content: space-between; gap: 10px;">
-    <img src="imgs/slippage_btc.png" width="50%" alt="Slippage on BTC" />
-   <img src="imgs/slippage_ltc.png" width="50%" alt="Slippage on LTC" />
-	</div>
-	<small>BTC and LTC slippage, source: Kraken Analytics</small>
+<!-- 2m -->
+
+--
+
+## Likvidita BTC vs LTC
+
+<div style="margin: 0 50px 0 50px;">
+  <div style="display: flex; justify-content: space-between; gap: 10px;">
+      <img src="imgs/slippage_btc.png" width="50%" alt="Slippage na BTC" />
+      <img src="imgs/slippage_ltc.png" width="50%" alt="Slippage na LTC" />
+  </div>
+  <small>Slippage BTC a LTC, zdroj: Kraken Analytics</small>
 </div>
 
-note: trading slower is better, but impractical in volatility
-note: ltc price could drop ~3% more percent once it dropped 1%
+note: poskytovani likvidity = mit otevrene limit ordery na burze
+note: pomalejší exekuce je lepší, ale hrozi pohyb ceny
+note: tvar order booku a pokles ceny btc
+
+<!-- 5m -->
 
 --
 
-## Goal: maximize liquidity
+## Cíl: maximalizovat likviditu
 
 --
 
-## Liquidity providers (*LP*)
+## Poskytovatelé likvidity (*LP*)
 
-- Lock their assets into AMM positions (eg. Uniswap DEX) or limit orders (eg. Binance CEX)
-- Face risks of hacks, exchange defaults, changing prices and adverse selection
-- Expect returns from spreads (order-book) or fees (AMM)
-- Sometimes incentivized by exchanges or token projects (rebates, deals)
+- Uzamknou své tokeny do buy i sell limit orderů (např. Binance CEX) nebo AMM pozic (např. Uniswap DEX)
+- Čelí rizikům hacků, krachů burz, měnících se cen a adverse selection {.fragment}
+- Očekávají výnosy ze spreadů (order book) nebo poplatků (AMM) {.fragment}
+- Někdy jsou placeni burzami (rebates) nebo projekty vydávajícími tokeny {.fragment}
 
---
-
-## Liquidity mechanics on CEX
-
-Example with order book:
-
-- MM quotes with $10 spread and 1 ETH quantity
-- ETH/USD price goes from 1990 to 2000
-- MM had buy order at 1985 and sell at 1995
-- MM sold and has now -1 ETH position sold at 1995
-- Price trends higher to 2010
-- MM buys back at 2005, realizes $10 loss
-
-<!-- TODO imgs -->
+<!-- 3m -->
 
 --
 
-## AMM profitability
+## Order book příklad
 
-<img src="imgs/eth_usdc_profitability.webp" width="100%" alt="ETH/USDC profitability" />
-<small>Uniswap v3 ETH/USDC pools. Source: <a href="https://crocswap.medium.com/">https://crocswap.medium.com/</a></small>
+<img src="imgs/mm.png" width="90%" alt="Market making" />
 
---
-
-## Why AMMs lose money?
-
-- Adverse fills and impermanent loss
-- Low volume, high volatility
-- Fees are not enough to cover losses
-- Fees don't adapt to market conditions (volatility)
-  - In order books, MMs just widen the spread
-
---
-
-## DEX solutions?
-
-- Order book DEXes -- <a href="https://openserum.io/">Open Serum</a> (Solana spot), <a href="https://trade.dydx.exchange/">DyDx</a>, <a href="https://app.hyperliquid.xyz/">Hyperliquid</a> (both perps on L2)
-- Dynamic fees -- <a href="https://www.crocswap.com/">CrocSwap</a> (AMM)
-- Failed(?) attempts -- <a href="https://cointelegraph.com/news/bancor-pauses-impairment-loss-protection-citing-hostile-market-conditions">Bancor pauses IL protection</a>
-
---
-
-## Who pays for liquidity?
-
-- AMMs: Retail LPs unaware of risks/profitability, takers on high-fee pools
-- CEXes:
-  - Exchanges pay rebates to big MMs (eg. 0.01%)
-  - Projects sponsor MM activity on their tokens
-    - Actually they sometimes sponsor *wash trading* as well
+note: co kdyz prijde market order
+note: zisk ze spreadu, ztrata pri volatilite
 
 ---
 
-## Algo-trading
+<!-- ## O Liquidity Labs
 
-- There are many more algorithmic-trading strategies besides MM
-- By style:
-  - arbitrage, mean-reversion, trend-following, pair-trading
-  - front-running, spoofing, manipulation {.fragment}
-- By implementation: {.fragment}
-  - machine-learning model based
-- By frequency: {.fragment}
-  - *HFT*, mid-frequency, on daily candles
-- By data type: {.fragment}
-  - on-chain metrics, news, social media sentiment
+- tři roky v trhu, one man show většinu času
+- nespekulujeme, nehádáme budoucí cenu
+- spolupracujeme s projekty, vydavateli tokenů a burzami
+- s (DeFi) altcoiny, na CEXech
+- cíl: přispět ke stabilitě, snížit transakční náklady
+
+<img src="imgs/liquidity-labs-logo.svg" width="30%" alt="Liquidity Labs" />
+
+note: jsme financováni tokenovými projekty a burzami, nejen z příjmů z obchodování. to je unikátní v algo-tradingem.
+
+--
+-->
+
+## Jak fungují Liquidity Labs
+
+- Python algo-trading platforma
+  - Vysoký výkon, nízká latence (0.010 s)
+  - Nízké poplatky (10 bps -> 2.5 bps -> -1 bps)
+  - Strategie a indikátory od spolupracujících quantů
+  - Vyhodnocování v reálném čase
+
+note: co dela algo trading platforma
+note: nizke poplatky davaji smysl nizkovynosovym strategiim.
+note: vyhodnoceni -> nalezeni chyb
+
+<img src="imgs/pnl.png" width="70%" alt="PnL" class="fragment" />
+
+<!-- 3m -->
 
 --
 
-## The Process
+## Výkon
+
+- Odpovídání na pakety ještě před jejich přijetím
+- Realita: burzy jsou pomalé (10 -- 100 ms) {.fragment}
+
+
+<!-- ## Fungování likvidity na CEX
+
+Příklad s order bookem:
+
+- MM kotace se spreadem 10$ a kvantitou 1 ETH
+- Cena ETH/USD se pohybuje od 1990 do 2000
+- MM měl nákupní objednávku na 1985 a prodej na 1995
+- MM prodáno a nyní má -1 ETH pozici prodanou na 1995
+- Cen naroste na 2010
+- MM kupuje zpět za 2005, realizuje ztrátu 10$
+
+TODO imgs?
+
+--
+-->
+
+---
+
+## Decentralizace
+
+- v DeFi je market-making automatizovaný AMM smart kontrakty
+- výhoda: každý se může stát poskytovatelem likvidity
+
+note: jsem fanda defi
+note: kazdy muze poskytovat likviditu a neco na tom vydelat
+
+--
+
+## Ziskovost AMM
+
+<img src="imgs/eth_usdc_profitability.webp" width="80%" alt="Ziskovost ETH/USDC" />
+<small>Uniswap v3 ETH/USDC pool. Zdroj: <a href="https://crocswap.medium.com/">https://crocswap.medium.com/</a></small>
+
+note: stably na tom nejsou lepe, riziko depegu. impermanent loss je pak docela permanentni
+
+--
+
+## Proč jsou AMM ztrátová?
+
+- Adverse trades a impermanent loss
+- Nízký obrat, vysoká volatilita
+- Poplatky nestačí na pokrytí ztrát
+- Poplatky se nepřizpůsobují tržním podmínkám (volatilitě)
+  - V order booku MM jen rozšíří spread
+
+note: vysvetlit volatilitu
+
+--
+
+## DEX řešení?
+
+- Order book DEXes
+  - <a href="https://openserum.io/">Open Serum</a> (Solana, spot)
+  - <a href="https://trade.dydx.exchange/">DyDx</a> (ETH L2, perp)
+  - <a href="https://app.hyperliquid.xyz/">Hyperliquid</a> (Hyperliquid L1, perp)
+- Dynamické poplatky -- <a href="https://www.crocswap.com/">CrocSwap</a> (AMM) {.fragment}
+- Neúspěšné(?) pokusy -- <a href="https://cointelegraph.com/news/bancor-pauses-impairment-loss-protection-citing-hostile-market-conditions">Bancor pozastavuje impermanent loss ochranu</a> {.fragment}
+
+<!-- --
+
+ ## Kdo platí za likviditu?
+
+- AMM: Maloobchodní LP, kteří si neuvědomují rizika/ztrátovost, uživatelé směňující v poolech s vysokými poplatky
+- CEXes:
+  - Burzy vyplácejí rebaty velkým MM (např. 0,01 %)
+  - Projekty sponzorují aktivitu MM na svých tokenech
+    - Ve skutečnosti také někdy sponzorují *wash trading* -->
+
+
+---
+
+## Algoritmické  obchodování
+
+- Podle stylu:
+  - arbitráž, mean-reversion, trend-following, párové obchodování
+  - front-running, spoofing, manipulace {.fragment}
+- Podle implementace: {.fragment}
+  - rozhodovací podmínky s naoptimalizovanými parametry
+  - založené na modelech strojového učení
+- Podle frekvence: {.fragment}
+  - *HFT*, střední frekvence, na denních svíčkách
+- Podle typu dat: {.fragment}
+  - on-chain metriky, zprávy, sentiment na sociálních sítích
+
+note: Kromě MM existuje mnohem více strategií
+note: linearni regrese
+
+--
+
+## Proces vývoje strategie
 
 - Idea
-  - Based on psychology/behaviour,
-- Data gathering
-- Parameter optimization
+  - na základě psychologie/chování, systematické neefektivity
+  - malé trhy, kam se nevyplatí vstupovat institucím, nabízí větší výnosy
+- Sběr dat
 - (Backtest)
-- Live trading
+- Optimalizace parametrů
+- Živé obchodování
 
 --
 
-## Caveats
+## Problémy algo-tradingu
 
-- *Alpha* decay
-- Execution issues
+- *Alfa* decay
+- Exekuce {.fragment}
+  - Adverse selection u limitních objednávek
+- Front running a exploitace alg {.fragment}
 - Risk premiums {.fragment}
-  - Lets buy dips after each quick -5% move and sell after 3 days
-  - Earns 1% each time, but once in a while looses 10%+.
-- Skewed returns
+  - "Buy the dip" po každém rychlém -5% pohybu a prodej po 3 dnech
+  - Propady jsou často reakce trhu na rizika
+  - Vydělá několikrát 1%, ale pak ztratí 10%+
 
 --
 
-## Backtest & optimization issues
+## Dip
 
+<img src="imgs/dip.jpg" alt="Dip" class="r-stretch" />
+
+--
+
+## Skewed returns
+
+<img src="imgs/skewed-distribution.png" alt="Skewed returns" class="r-stretch" />
+
+note: je uzitecne rozumnet jevu nebo mit alespon dlouhodobou statistiku
+note: zvysovani kapitalu, paka a yolo
+
+--
+
+## Backtestování
+
+```python
+data = lakeapi.load_data(
+  table = 'trades', start = start, end = end,
+  symbols = ['BTC-USDT'], exchanges = ['BINANCE'],
+)
+data['rsi'] = rsi_48h(data['price'])
+backtest = vectorbt.Portfolio.from_signals(
+  price = data['price'].shift(-10),
+  entries = data['rsi'] < 10,
+  exits = data['rsi'] > 90,
+  fees = 0.00025,
+)
+backtest.plot_positions().show()
+backtest.plot_cum_returns().show()
+print(backtest.stats(metrics))
+```
+
+note: jupyter notebook
+note: pridal jsem short pozice, na futures
+
+--
+
+<img src="imgs/backtest.png" alt="Backtest" class="r-stretch" />
+
+note: SP500 ma sharpe kolem 0.8
+note: vysledek nadejny, ale i po backtestu zustava dost otazek
+
+--
+
+## Problémy
+
+- Přesnost simulace exekuce
 - Overfitting
-  - even manually!
-- Forward looking bugs
-- Execution precision
 
---
-
-## Execution issues
-
-- Slippage
-- Adverse selection for limit orders
-- Front-running
-
---
-
-## Performance
-
-- Sending packets before receiving
-- Not allocating memory
-- Fitting into cache
-- Reality: exchanges are slow
+note: strategie mela prumerny return 7%
+note: overfitting i rucne
+note: kristalova koule, detekce exekuci
 
 ---
 
-## Market (Maker) adversaries
+## Protivníci (tvůrců) trhu
 
-- manipulations
-- insider trading
+- manipulátoři
+- insider tradeři
 
 --
 
-## Manipulations
+## Manipulace
 
 - Pump & dumps
-- On small-cap tokens with low liquidity
-- Attacker slowly accumulates position (buys partly from MMs) {.fragment}
-- (optional) Attacker pays influencers to promote the token
-- Attacker buys aggressively to pump the price (mostly from MMs)
-- MMs have to buy-back at higher price {.fragment}
-- Attacker sells to MMs and last buyers
-- When price starts to fall, attacker sells the rest aggressively, causing the price to collapse
+- Na tokenech s malou tržní kapitalizací a nízkou likviditou
+- Manipulace kvete na trzích kde je těžké určit cenu aktiva
+
+--
+
+## Příklad manipulace
+
+<img src="imgs/pump-dump2.png" alt="Pump & dump" />
+<!-- todo better pic! -->
+
+note: Útočník pomalu akumuluje pozici (částečně nakupuje od MM)
+note: (volitelné) Útočník platí influencery za propagaci tokenu
+note: Útočník agresivně nakupuje, aby pumpoval cenu (většinou od MM)
+note: MM musí zpětně odkupovat za vyšší cenu {.fragment}
+note: Útočník prodává MM a posledním kupujícím
+note: Když cena začne klesat, útočník agresivně prodá zbytek, což způsobí kolaps ceny
 
 --
 
 ## Insider trading
 
-- Project teams have access to non-public information
-- Team members or management use it to front-run the market before announcements
+- Týmy vydávající tokeny mají přístup k neveřejným informacím
+- Členové týmu nebo jeho vedení informací využívají k obchodování před announcementy
 
 --
 
-## Insider trading
+## Příklad insider tradingu
 
-<img src="imgs/time_pelosi.png" alt="Trader of the year" class="r-stretch" class="fragment" />
+<img src="imgs/time_pelosi.png" alt="Obchodník roku" class="r-stretch" class="fragment" />
 
-<a href="https://nypost.com/2022/10/05/house-speaker-nancy-pelosi-has-accrued-millions-from-husbands-trades-report/">Nancy Pelosi (source)</a>
+<a href="https://nypost.com/2022/10/05/house-speaker-nancy-pelosi-has-accrued-millions-from-husbands-trades-report/">Nancy Pelosi (zdroj)</a>
 
-note: husband bought Nvidia before subsidies were considered
-note: husband bought Tesla as his wife was pushing subsidies
+note: manžel koupil Nvidii, než se uvažovalo o dotacích
+note: manžel koupil Teslu, následně jeho žena prosazovala dotace
 
 ---
 
-## Chances of retail traders
+## Šance jednotlivců
 
-- Retail traders are at a disadvantage
-  - High fees, information assymeties, manipulated news, influencers, bad actors...
-  - This applies to crypto as well
-  - Solo trader psychology: gambling, overconfidence, mistakes
-  - Lower the trading frequency, the better (HODL)
+- Market ordery jsou drahé (poplatky, spread, slippage)
+- Limit ordery je potřeba rychle aktualizovat, aby nebyly podobně ztrátové {.fragment}
 
-note: don't do even algo-trading alone?
+<div class="fragment">
+<img src="imgs/exexe.png" alt="Execution extension" height="300px" />
+
+<a href="https://cryptotrade.tools">CryptoTrade.Tools</a>
+</div>
+
+note: open-source, bezpecnost
+note: long-term -> dexy
 
 --
 
-## Please don't "day trade"
+## Šance jednotlivců (2)
 
-<img src="imgs/day-trading.jpg" alt="Day trading" />
+- Vysoké poplatky, informační asymetrie, zmanipulované zprávy, influenceři, exploitace...
+- Psychologie sólo obchodníka: hazard, sebevědomí, chyby
+- Nižší frekvence obchodování {.fragment}
+  - Délka držení měsíce a déle (extrém: *HODL*)
 
-note: there are better ways to spend your time/energy in crypto
+note: poplatky & strategie
+note: neděláte ani algo-trading sám?
+note: znám celé tradingové firmy, které po letech nevydělávají
+note: existují lepší způsoby, jak trávit čas/energii v kryptoměnách
+
+---
+
+## Q&A
+
+- Jan Škoda, twitter: <a href="https://twitter.com/jan_skoda">@jan_skoda</a>
+- <a href="https://liquiditylabs.xyz/">Liquidity Labs</a>
+- <a href="https://crypto-lake.com/">Crypto Lake</a>, twitter: <a href="https://twitter.com/crypto_lake_com">@crypto_lake_com</a>
 
 <!--
-- retail traders, does it make sense?
-  - where it does make sense?
-- running a one-man-show project takeaways
-  - more efficient than a small team
-  - automation
+- maloobchodníci, má to smysl?
+   - kde to má smysl?
+- provozování samostatného projektu s sebou
+   - efektivnější než malý tým
+   - automatizace
 -->
