@@ -1,6 +1,6 @@
 ---
 theme: white
-fragments: false # TODO remove
+fragments: true # TODO remove
 ---
 
 <!-- TODO move some bullet points into notes? -->
@@ -139,7 +139,7 @@ note: vyhodnoceni -> nalezeni chyb
 ## Decentralizace
 
 - v DeFi je market-making automatizovaný AMM smart kontrakty
-- výhoda: každý se může stát poskytovatelem likvidity
+- výhoda: každý se může stát poskytovatelem likvidity {.fragment}
 
 note: jsem fanda defi
 note: kazdy muze poskytovat likviditu a neco na tom vydelat
@@ -160,7 +160,7 @@ note: stably na tom nejsou lepe, riziko depegu. impermanent loss je pak docela p
 - Adverse trades a impermanent loss
 - Nízký obrat, vysoká volatilita
 - Poplatky nestačí na pokrytí ztrát
-- Poplatky se nepřizpůsobují tržním podmínkám (volatilitě)
+- Poplatky se nepřizpůsobují tržním podmínkám (volatilitě) {.fragment}
   - V order booku MM jen rozšíří spread
 
 note: vysvetlit volatilitu
@@ -276,7 +276,7 @@ note: vysledek nadejny, ale i po backtestu zustava dost otazek
 ## YOLO!...?
 
 - Přesnost simulace exekuce
-- Chyby v analyze, v datech {.fragment}
+- Chyby v analýze, v datech {.fragment}
 - Overfitting {.fragment}
 
 note: strategie mela prumerny return 7%
@@ -295,8 +295,8 @@ note: overfitting i rucne s jednim parametrem
 ## Manipulace
 
 - Pump & dumps
-- Na tokenech s malou tržní kapitalizací a nízkou likviditou
-- Manipulace kvete na trzích kde je těžké určit cenu aktiva
+- Na tokenech s malou tržní kapitalizací a nízkou likviditou {.fragment}
+- Manipulace kvete na trzích kde je těžké určit cenu aktiva {.fragment}
 
 --
 
