@@ -4,8 +4,6 @@ fragments: false # TODO remove
 ---
 
 <!-- TODO move some bullet points into notes? -->
-<!-- TODO posunout algo trading jako prvni cast? -->
-<!-- TODO zdroje? -->
 
 # <small>Algo-trading v kryptu</small>
 
@@ -34,6 +32,15 @@ note: co je likvidita a proc je potrebna, jak se poskytuje, jak vypada algo-trad
 <!-- 4m -->
 
 ---
+
+## 1. Poskytování likvidity
+
+note: detaily strategie, kterou se zabýváme my
+note: uniswap analogie
+
+<!-- 1m -->
+
+--
 
 ## Likvidita aktiva
 
@@ -85,6 +92,8 @@ note: tvar order booku a pokles ceny btc
 note: co kdyz prijde market order
 note: zisk ze spreadu, ztrata pri volatilite
 
+<!-- 5m -->
+
 ---
 
 <!-- ## O Liquidity Labs
@@ -125,23 +134,6 @@ note: vyhodnoceni -> nalezeni chyb
 - Odpovídání na pakety ještě před jejich přijetím
 - Realita: burzy jsou pomalé (10 -- 100 ms) {.fragment}
 
-
-<!-- ## Fungování likvidity na CEX
-
-Příklad s order bookem:
-
-- MM kotace se spreadem 10$ a kvantitou 1 ETH
-- Cena ETH/USD se pohybuje od 1990 do 2000
-- MM měl nákupní objednávku na 1985 a prodej na 1995
-- MM prodáno a nyní má -1 ETH pozici prodanou na 1995
-- Cen naroste na 2010
-- MM kupuje zpět za 2005, realizuje ztrátu 10$
-
-TODO imgs?
-
---
--->
-
 ---
 
 ## Decentralizace
@@ -172,6 +164,7 @@ note: stably na tom nejsou lepe, riziko depegu. impermanent loss je pak docela p
   - V order booku MM jen rozšíří spread
 
 note: vysvetlit volatilitu
+note: APRka lzou
 
 --
 
@@ -184,20 +177,9 @@ note: vysvetlit volatilitu
 - Dynamické poplatky -- <a href="https://www.crocswap.com/">CrocSwap</a> (AMM) {.fragment}
 - Neúspěšné(?) pokusy -- <a href="https://cointelegraph.com/news/bancor-pauses-impairment-loss-protection-citing-hostile-market-conditions">Bancor pozastavuje impermanent loss ochranu</a> {.fragment}
 
-<!-- --
-
- ## Kdo platí za likviditu?
-
-- AMM: Maloobchodní LP, kteří si neuvědomují rizika/ztrátovost, uživatelé směňující v poolech s vysokými poplatky
-- CEXes:
-  - Burzy vyplácejí rebaty velkým MM (např. 0,01 %)
-  - Projekty sponzorují aktivitu MM na svých tokenech
-    - Ve skutečnosti také někdy sponzorují *wash trading* -->
-
-
 ---
 
-## Algoritmické  obchodování
+## 2. Algotrading obecně
 
 - Podle stylu:
   - arbitráž, mean-reversion, trend-following, párové obchodování
@@ -221,7 +203,7 @@ note: linearni regrese
   - na základě psychologie/chování, systematické neefektivity
   - malé trhy, kam se nevyplatí vstupovat institucím, nabízí větší výnosy
 - Sběr dat
-- (Backtest)
+- Backtest
 - Optimalizace parametrů
 - Živé obchodování
 
@@ -231,12 +213,14 @@ note: linearni regrese
 
 - *Alfa* decay
 - Exekuce {.fragment}
-  - Adverse selection u limitních objednávek
+  <!-- - Adverse selection u limitních objednávek -->
 - Front running a exploitace alg {.fragment}
 - Risk premiums {.fragment}
   - "Buy the dip" po každém rychlém -5% pohybu a prodej po 3 dnech
-  - Propady jsou často reakce trhu na rizika
   - Vydělá několikrát 1%, ale pak ztratí 10%+
+
+note: alfa je fancy slovo pro ideu/napad
+note: Propady jsou často reakce trhu na rizika
 
 --
 
@@ -250,8 +234,9 @@ note: linearni regrese
 
 <img src="imgs/skewed-distribution.png" alt="Skewed returns" class="r-stretch" />
 
-note: je uzitecne rozumnet jevu nebo mit alespon dlouhodobou statistiku
+note: je uzitecne rozumet jevu nebo mit alespon dlouhodobou statistiku
 note: zvysovani kapitalu, paka a yolo
+note: napr. poskytovani likvidity, nakupovani dipu, prodavani opci, martingale a dalsi
 
 --
 
@@ -267,7 +252,7 @@ backtest = vectorbt.Portfolio.from_signals(
   price = data['price'].shift(-10),
   entries = data['rsi'] < 10,
   exits = data['rsi'] > 90,
-  fees = 0.00025,
+  fees = 0.0002,
 )
 backtest.plot_positions().show()
 backtest.plot_cum_returns().show()
@@ -276,6 +261,8 @@ print(backtest.stats(metrics))
 
 note: jupyter notebook
 note: pridal jsem short pozice, na futures
+
+<!-- 5 min -->
 
 --
 
@@ -286,18 +273,19 @@ note: vysledek nadejny, ale i po backtestu zustava dost otazek
 
 --
 
-## Problémy
+## YOLO!...?
 
 - Přesnost simulace exekuce
-- Overfitting
+- Chyby v analyze, v datech {.fragment}
+- Overfitting {.fragment}
 
 note: strategie mela prumerny return 7%
-note: overfitting i rucne
-note: kristalova koule, detekce exekuci
+note: survival bias, nakupovani dipu & luna example
+note: overfitting i rucne s jednim parametrem
 
 ---
 
-## Protivníci (tvůrců) trhu
+## 3. Konflikty v trhu
 
 - manipulátoři
 - insider tradeři
@@ -330,6 +318,7 @@ note: Když cena začne klesat, útočník agresivně prodá zbytek, což způso
 
 - Týmy vydávající tokeny mají přístup k neveřejným informacím
 - Členové týmu nebo jeho vedení informací využívají k obchodování před announcementy
+- Tyto zisky jsou na účet zbytku trhu a market makerů
 
 --
 
@@ -339,15 +328,17 @@ note: Když cena začne klesat, útočník agresivně prodá zbytek, což způso
 
 <a href="https://nypost.com/2022/10/05/house-speaker-nancy-pelosi-has-accrued-millions-from-husbands-trades-report/">Nancy Pelosi (zdroj)</a>
 
+note: jako bokovku dělá i jednu z nejvlivnějších političek v US
 note: manžel koupil Nvidii, než se uvažovalo o dotacích
 note: manžel koupil Teslu, následně jeho žena prosazovala dotace
+note: MM pak rozsiri spready a zaplati to mali investori
 
----
+--
 
 ## Šance jednotlivců
 
+- Manipulace se zprávami (sociální sítě i klasická média)
 - Market ordery jsou drahé (poplatky, spread, slippage)
-- Limit ordery je potřeba rychle aktualizovat, aby nebyly podobně ztrátové {.fragment}
 
 <div class="fragment">
 <img src="imgs/exexe.png" alt="Execution extension" height="300px" />
@@ -355,30 +346,28 @@ note: manžel koupil Teslu, následně jeho žena prosazovala dotace
 <a href="https://cryptotrade.tools">CryptoTrade.Tools</a>
 </div>
 
+note: pokud nejste senator
 note: open-source, bezpecnost
 note: long-term -> dexy
+note: long-term investice a ne spekulativni trading
 
 --
 
-## Šance jednotlivců (2)
+## Je algo-trading pro vás?
 
-- Vysoké poplatky, informační asymetrie, zmanipulované zprávy, influenceři, exploitace...
-- Psychologie sólo obchodníka: hazard, sebevědomí, chyby
-- Nižší frekvence obchodování {.fragment}
-  - Délka držení měsíce a déle (extrém: *HODL*)
+- algo-trading je super "sport" {.fragment}
+- není to rozhodně "pasivní příjem" po pár večerech {.fragment}
+- může být prospěšný i škodlivý {.fragment}
 
-note: poplatky & strategie
-note: neděláte ani algo-trading sám?
-note: znám celé tradingové firmy, které po letech nevydělávají
-note: existují lepší způsoby, jak trávit čas/energii v kryptoměnách
+note: je fer, objevovani
 
 ---
 
 ## Q&A
 
 - Jan Škoda, twitter: <a href="https://twitter.com/jan_skoda">@jan_skoda</a>
-- <a href="https://liquiditylabs.xyz/">Liquidity Labs</a>
-- <a href="https://crypto-lake.com/">Crypto Lake</a>, twitter: <a href="https://twitter.com/crypto_lake_com">@crypto_lake_com</a>
+- <a href="https://liquiditylabs.xyz/">LiquidityLabs.xyz</a>
+- <a href="https://crypto-lake.com/">Crypto-Lake.com</a>, twitter: <a href="https://twitter.com/crypto_lake_com">@crypto_lake_com</a>
 
 <!--
 - maloobchodníci, má to smysl?
