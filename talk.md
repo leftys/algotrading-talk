@@ -14,8 +14,8 @@ Trh z pohledu poskytovatele likvidity
 Jan Škoda
 
 note: intro story?
-note: define algo-trading?
-note: co je likvidita a proc je potrebna, jak se poskytuje, jak vypada algo-trading obecne a jake ma problemy. obnazime i nejake problemy rucniho tradingu. konflikty v trhu.
+define algo-trading?
+co je likvidita a proc je potrebna, jak se poskytuje, jak vypada algo-trading obecne a jake ma problemy. obnazime i nejake problemy rucniho tradingu. konflikty v trhu.
 
 <!-- 2m -->
 
@@ -151,13 +151,11 @@ note: kazdy muze poskytovat likviditu a neco na tom vydelat
 <img src="imgs/eth_usdc_profitability.webp" width="80%" alt="Ziskovost ETH/USDC" />
 <small>Uniswap v3 ETH/USDC pool. Zdroj: <a href="https://crocswap.medium.com/">https://crocswap.medium.com/</a></small>
 
-note: stably na tom nejsou lepe, riziko depegu. impermanent loss je pak docela permanentni
-
 --
 
 ## Proč jsou AMM ztrátová?
 
-- Adverse trades a impermanent loss
+- Impermanent loss
 - Nízký obrat, vysoká volatilita
 - Poplatky nestačí na pokrytí ztrát
 - Poplatky se nepřizpůsobují tržním podmínkám (volatilitě) {.fragment}
