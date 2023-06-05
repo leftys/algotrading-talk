@@ -1,9 +1,8 @@
 ---
 theme: white
-fragments: true # TODO remove
+fragments: true
 ---
 
-<!-- TODO move some bullet points into notes? -->
 
 # <small>Algo-trading v kryptu</small>
 
@@ -13,9 +12,9 @@ Trh z pohledu poskytovatele likvidity
 
 Jan Škoda
 
-note: intro story?
+note:
 define algo-trading?
-co je likvidita a proc je potrebna, jak se poskytuje, jak vypada algo-trading obecne a jake ma problemy. obnazime i nejake problemy rucniho tradingu. konflikty v trhu.
+co je likvidita a proc je potrebna, jak se poskytuje, jak vypada algo-trading obecne a jake ma problemy. problemy rucniho tradingu. konflikty v trhu.
 
 <!-- 2m -->
 
@@ -95,21 +94,6 @@ note: zisk ze spreadu, ztrata pri volatilite
 <!-- 5m -->
 
 ---
-
-<!-- ## O Liquidity Labs
-
-- tři roky v trhu, one man show většinu času
-- nespekulujeme, nehádáme budoucí cenu
-- spolupracujeme s projekty, vydavateli tokenů a burzami
-- s (DeFi) altcoiny, na CEXech
-- cíl: přispět ke stabilitě, snížit transakční náklady
-
-<img src="imgs/liquidity-labs-logo.svg" width="30%" alt="Liquidity Labs" />
-
-note: jsme financováni tokenovými projekty a burzami, nejen z příjmů z obchodování. to je unikátní v algo-tradingem.
-
---
--->
 
 ## Jak fungují Liquidity Labs
 
@@ -211,7 +195,6 @@ note: linearni regrese
 
 - *Alfa* decay
 - Exekuce {.fragment}
-  <!-- - Adverse selection u limitních objednávek -->
 - Front running a exploitace alg {.fragment}
 - Risk premiums {.fragment}
   - "Buy the dip" po každém rychlém -5% pohybu a prodej po 3 dnech
@@ -301,7 +284,6 @@ note: overfitting i rucne s jednim parametrem
 ## Příklad manipulace
 
 <img src="imgs/pump-dump2.png" alt="Pump & dump" />
-<!-- todo better pic! -->
 
 note: Útočník pomalu akumuluje pozici (částečně nakupuje od MM)
 note: (volitelné) Útočník platí influencery za propagaci tokenu
@@ -326,10 +308,11 @@ note: Když cena začne klesat, útočník agresivně prodá zbytek, což způso
 
 <a href="https://nypost.com/2022/10/05/house-speaker-nancy-pelosi-has-accrued-millions-from-husbands-trades-report/">Nancy Pelosi (zdroj)</a>
 
-note: jako bokovku dělá i jednu z nejvlivnějších političek v US
-note: manžel koupil Nvidii, než se uvažovalo o dotacích
-note: manžel koupil Teslu, následně jeho žena prosazovala dotace
-note: MM pak rozsiri spready a zaplati to mali investori
+note:
+jako bokovku dělá i jednu z nejvlivnějších političek v US
+manžel koupil Nvidii, než se uvažovalo o dotacích
+manžel koupil Teslu, následně jeho žena prosazovala dotace
+MM pak rozsiri spready a zaplati to mali investori
 
 --
 
@@ -366,11 +349,3 @@ note: je fer, objevovani
 - Jan Škoda, twitter: <a href="https://twitter.com/jan_skoda">@jan_skoda</a>
 - <a href="https://liquiditylabs.xyz/">LiquidityLabs.xyz</a>
 - <a href="https://crypto-lake.com/">Crypto-Lake.com</a>, twitter: <a href="https://twitter.com/crypto_lake_com">@crypto_lake_com</a>
-
-<!--
-- maloobchodníci, má to smysl?
-   - kde to má smysl?
-- provozování samostatného projektu s sebou
-   - efektivnější než malý tým
-   - automatizace
--->
